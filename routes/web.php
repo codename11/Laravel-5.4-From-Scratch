@@ -42,15 +42,18 @@
     return view('welcome', compact("tasks"));
 });*/
 
-Route::get('/', function () {
+//Version1
+//Route::get('/', function () {
     /*Poziva se klasa DB koja je integrisana u Laravelu,
     koji uzima tabelu 'tasks'.*/
-    $tasks = DB::table("tasks")->latest()->get();
+    //$tasks = DB::table("tasks")->latest()->get();
     //return $tasks;
-    return view('welcome', compact("tasks"));
-});
+    //return view('welcome', compact("tasks"));
+//});
 
+/*Version1
 Route::get('/tasks', "TasksController@index");
+*/
 
 //Route::get('/tasks', function () {
     /*Poziva se klasa DB koja je integrisana u Laravelu,
@@ -61,7 +64,9 @@ Route::get('/tasks', "TasksController@index");
     //return $tasks;
     //return view('tasks.index', compact("tasks"));
 //});
+/*Version1
 Route::get('/tasks/{task}', "TasksController@show");
+*/
 //*Gornje nadje ceo objekat, donje samo id.*/ 
 //Route::get('/tasks/{tasks}', "TasksController@show");
 //Route::get('/tasks/{tasks}', function ($id) {
@@ -73,7 +78,11 @@ Route::get('/tasks/{task}', "TasksController@show");
     //return $tasks;
     //return view('tasks.show', compact("task"));
 //});
-
+/* Version1
 Route::get('/about', function () {
     return view('about');
 });
+*/
+
+Route::get('/', "PostsController@index");
+Route::get('/posts/{post}', "PostsController@show");
