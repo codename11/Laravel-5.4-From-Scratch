@@ -46,7 +46,7 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     //public function show($id)
-    public function show(Task $task)
+    public function show(Task $task)//Task::find(wildcard)
     {
         //Kada se upotrebljava id mora se izvrsiti pretraga.
         //$task = Task::find($id);
