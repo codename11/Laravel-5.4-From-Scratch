@@ -19,16 +19,17 @@
           <h3 class="pb-3 mb-4 font-italic border-bottom">
             Our Posts
           </h3>
-
+          
           @if(count($posts) > 0)
-
+          <?php $i = count($posts); ?>
             <ul class="list-group">
               @foreach($posts as $post)
+              <?php $i--; ?>
               <li style="list-style-type: none;">
-                
+
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a style="text-decoration: none;" href="/posts/{{$post->id}}">{{$post->title}}</a></h2>
-                    <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="posts/{{$post->id}}">{{$post->id}}</a></p>
+                    <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="#">{{$post->id}}</a></p>
                     <p>{!!$post->body!!}</p>
                 </div>
 
