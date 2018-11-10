@@ -67,7 +67,7 @@
                   {{ csrf_field() }} 
                   <div class="form-group">
                     <label for="comment">Your comment:</label>
-                    <textarea type="text" class="form-control" name="body" id="comment" placeholder="Enter a comment" required></textarea>
+                    <textarea type="text" class="form-control" name="body" id="body" placeholder="Enter a comment" required></textarea>
                   </div>
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add Comment</button>

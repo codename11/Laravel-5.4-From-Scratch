@@ -80,5 +80,14 @@
             @yield('content')
         </main>
     </div>
+<script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script>
+    let textArea = document.getElementById("body");
+    window.onload = () => {
+        if(textArea){
+            CKEDITOR.replace("body");
+        }
+    }
+</script>
 </body>
 </html>
