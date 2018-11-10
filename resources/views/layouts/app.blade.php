@@ -35,7 +35,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                        @if(!Auth::guest())
                         <li class="nav-item"><a class="nav-link" href="/posts/create">Create Posts</a></li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

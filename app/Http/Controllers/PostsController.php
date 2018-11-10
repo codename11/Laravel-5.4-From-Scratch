@@ -6,6 +6,19 @@ use Illuminate\Http\Request;
 use App\Post;
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {   /*Postavi autorizaciju za sve osim za index i show, 
+        odnosno za pronalazenje i prikazivanje.*/
+        $this->middleware('auth')->except(['index', 'show']);
+        /*Ovo znaci da ce traziti autorizaciju 
+        za sve operacije, osim za indeksiranje 
+        i prikazivanje postova. Dakle svako moze da 
+        gleda postove, ali samo trenutno ulogovani 
+        korisnik moze editovati i brisati 
+        i to samo svoje postove.*/
+    }
+
     public function index(){
 
         //return view("posts.index");
@@ -52,7 +65,11 @@ class PostsController extends Controller
             "body" => request("body")
         ]);*/
         /*Isto je kao gornje.*/
-        Post::create(request(["title", "body"]));
+        Post::create([
+            "title" => request('title'), 
+            "body" => request('body'), 
+            "user_id" => auth()->user()->id
+        ]);
         /*Mass-assigment: Ako se ovako 
         koristi sa 'create', onda se mora u modelu 'Post'
         navesti ono fillable ili guarded 

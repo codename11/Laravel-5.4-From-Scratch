@@ -62,6 +62,7 @@
             @endif
 
             <!--Forma za dodavanje komentara-->
+            @if(!Auth::guest())
               <form method="POST" action="/posts/{{$post->id}}/comments" style="margin-bottom: 10px;">
                   {{ csrf_field() }} 
                   <div class="form-group">
@@ -72,6 +73,7 @@
                     <button type="submit" class="btn btn-primary">Add Comment</button>
                   </div>
               </form>
+              @endif
               
             <a href="/" class="btn btn-success" style="margin:10px;">Back</a>
 

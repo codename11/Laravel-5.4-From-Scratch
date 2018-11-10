@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    /*Ovim je dozvoljen upis u navedena polja 
+    /*Ovim je dozvoljen upis u navedena polja u bazi
     prilikom mass-assigment-a.*/
     protected $fillable = [
         'title', 
-        'body'
+        'body',
+        "user_id"
     ];
 
     /*Ovim se navodi da u ovim poljima 
     nije dozvoljen upis prilikom mass-assigment-a.*/
-    protected $guarded = ["user_id"];
+    //protected $guarded = ["user_id"];
 
     /*Ovime se povezuje svaki pojedinacni komentar 
     sa id-jem nekog posta.*/
