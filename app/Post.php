@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Post extends Model
 {
     /*Ovim je dozvoljen upis u navedena polja u bazi
@@ -24,5 +24,15 @@ class Post extends Model
         return $this->hasMany(Comment::class);
         /*Gornje i donje su isto.*/ 
         //return $this->hasMany("App\Comment");
+    }
+
+    public function scopeFilter($query,$filters){
+        if(isset($filters["month"])){
+            $query->whereMonth("created_at",Carbon::parse($filters["month"])->month);
+        }
+
+        if(isset($filters["year"])){
+            $query->whereYear("created_at",Carbon::parse($filters["year"]));
+        }
     }
 }

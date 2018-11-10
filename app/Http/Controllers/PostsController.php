@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Carbon\Carbon;
 class PostsController extends Controller
 {
 
@@ -24,9 +25,33 @@ class PostsController extends Controller
         //return view("posts.index");
         //$posts = Post::orderBy("created_at","desc")->get();
         /*Donje i gornje su isto.*/
-        $posts = Post::latest()->get();
-        return view("posts.frontpage", compact("posts"));
+        $posts = Post::latest();
 
+        /*if($month = request("month")){
+            //Filtrira upit po mesecu u get parametru.
+            $posts->whereMonth("created_at",Carbon::parse($month)->month);
+        }
+
+        if($year = request("year")){
+            //Filtrira upit po godini u get parametru.
+            $posts->whereYear("created_at",Carbon::parse($year));
+        }*/
+        if(request("month")){
+            /*Filtrira upit po mesecu u get parametru.*/
+            $posts->whereMonth("created_at",Carbon::parse(request("month"))->month);
+        }
+
+        if(request("year")){
+            /*Filtrira upit po godini u get parametru.*/
+            $posts->whereYear("created_at",Carbon::parse(request("year")));
+        }
+        $posts = $posts->get();
+        /*Ovo(gornje) i ovo donje je isto, ali samo ako u Post modelu ima funkcija scope filter.*/
+        //$posts = Post::latest()->filter(request(["month","year"]))->get();
+        /*Ovo(gornje) vazi samo ako u Post modelu ima funkcija scope filter.*/
+        $archives = Post::selectRaw("year(created_at) as year, monthname(created_at) as month, count(*) as published")->groupBy("year","month")->orderByRaw("min(created_at) desc")->get()->toArray();
+        //dd($archives);
+        return view("posts.frontpage", compact("posts","archives"));
     }
 
     public function show(Post $post){

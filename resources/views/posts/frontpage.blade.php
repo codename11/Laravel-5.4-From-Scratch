@@ -21,10 +21,10 @@
           </h3>
           
           @if(count($posts) > 0)
-          <?php $i = count($posts); ?>
+          
             <ul class="list-group">
               @foreach($posts as $post)
-              <?php $i--; ?>
+              
               <li style="list-style-type: none;">
 
                 <div class="blog-post">

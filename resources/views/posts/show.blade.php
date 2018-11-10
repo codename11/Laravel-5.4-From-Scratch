@@ -39,7 +39,7 @@
               @foreach($post->comments as $comment)
                 <li class="list-group-item">
                   <strong>{{$comment->created_at->diffForHumans()}}: </strong>
-                  {{$comment->body}}
+                  {!!$comment->body!!}
                 </li>
               @endforeach
             </ul>
