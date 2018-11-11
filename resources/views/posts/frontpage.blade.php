@@ -1,6 +1,6 @@
 @extends("layouts.app1")
     @section("content")
-
+    
     <div class="container">
       
         @include("layouts.inc.header")
@@ -36,9 +36,9 @@
               </li>
               @endforeach
             </ul>
-
+            
           @endif
-
+          
           <?php // @include("layouts.inc.blogpost3") ?>
 
           <?php // @include("layouts.inc.blogpost2") ?>
@@ -59,9 +59,11 @@
         </aside><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
-
+      <div class="container">
+        {{$posts->links()}}<!--Ovo je za paginaciju.-->
+      </div>
     </main><!-- /.container -->
-
+    
     @include("layouts.inc.footer")
   
 @endsection

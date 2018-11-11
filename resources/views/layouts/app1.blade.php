@@ -14,8 +14,6 @@
     <link href="{{ asset('css/frontpage.css') }}" rel="stylesheet">
     </head>
 <body>
-
-   
     
     @yield("content")
 

@@ -37,21 +37,23 @@ class PostsController extends Controller
             $posts->whereYear("created_at",Carbon::parse($year));
         }*/
         if(request("month")){
-            /*Filtrira upit po mesecu u get parametru.*/
+            //Filtrira upit po mesecu u get parametru.
             $posts->whereMonth("created_at",Carbon::parse(request("month"))->month);
         }
 
         if(request("year")){
-            /*Filtrira upit po godini u get parametru.*/
+            //Filtrira upit po godini u get parametru.
             $posts->whereYear("created_at",Carbon::parse(request("year")));
         }
-        $posts = $posts->get();
+        $posts = $posts->paginate(2);
+        //$posts = $posts->get();
         /*Ovo(gornje) i ovo donje je isto, ali samo ako u Post modelu ima funkcija scope filter.*/
         //$posts = Post::latest()->filter(request(["month","year"]))->get();
         /*Ovo(gornje) vazi samo ako u Post modelu ima funkcija scope filter.*/
-        $archives = Post::selectRaw("year(created_at) as year, monthname(created_at) as month, count(*) as published")->groupBy("year","month")->orderByRaw("min(created_at) desc")->get()->toArray();
+        //$archives = Post::selectRaw("year(created_at) as year, monthname(created_at) as month, count(*) as published")->groupBy("year","month")->orderByRaw("min(created_at) desc")->get()->toArray();
+        
         //dd($archives);
-        return view("posts.frontpage", compact("posts","archives"));
+        return view("posts.frontpage", compact("posts"));
     }
 
     public function show(Post $post){
@@ -102,6 +104,11 @@ class PostsController extends Controller
         //return $post;
         // Save it to database
 
+        //request()->session();
+        //session("message", "You post has been published");
+        $message = session()->flash("message", "Your post has been published");
+        //return session("message");
+        //dd(request()->session());
         // And then redirect to home page
         return redirect("/posts/create");
     }

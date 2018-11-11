@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if($flash = session("message"))
+    <div class="alert alert-success" id="flash-message" role="alert">
+            Thanks for sign up
+        {{$flash}}
+    </div>
+@endif 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

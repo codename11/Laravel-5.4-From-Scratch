@@ -15,6 +15,12 @@ class AppServiceProvider extends ServiceProvider
     {
         /*Ovde povecava mogucu duzinu za pdatke u bazi tipa string.*/
         Schema::defaultStringLength(191);
+        /*Umesto da se salje svakom view-u pojedinacno, 
+        posalje se direktno archives fajlu, pa gde kod se pozove fajl, 
+        ti podaci su dostupni.*/
+        view()->composer("layouts.inc.archives", function($view){
+            $view->with("archives", \App\Post::archives());
+        });
     }
 
     /**

@@ -1,6 +1,10 @@
 @extends("layouts.app1")
     @section("content")
-
+    @if($flash = session("message"))
+        <div class="alert alert-success" id="flash-message" role="alert">
+            {{$flash}}
+        </div>
+    @endif 
     <div class="container">
         @include("layouts.inc.header")
 
@@ -31,7 +35,7 @@
                 <textarea id="body" name="body" class="form-control" placeholder="Enter body" required></textarea>
               </div>
 
-              <button type="submit" class="btn btn-default">Publish</button>
+              <button type="submit" class="btn btn-default" style="margin-bottom: 10px;">Publish</button>
             </form>
           
             <!--Provera za greske.-->

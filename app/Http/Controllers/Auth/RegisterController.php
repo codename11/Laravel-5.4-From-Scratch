@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Welcome;
+use App\Mail\WelcomeAgain;
 
 class RegisterController extends Controller
 {
@@ -28,6 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
+
     protected $redirectTo = '/dashboard';
 
     /**
@@ -48,6 +52,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        session()->flash("message", "friend :)");
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -63,10 +69,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        //dd($data);
+        
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        //\Mail::to($user)->send(new Welcome($user));
+        \Mail::to($user)->send(new WelcomeAgain($user));
+        return $user;
     }
+
 }
