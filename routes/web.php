@@ -99,3 +99,5 @@ Route::post('/posts/{post}/comments', "CommentsController@store");
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::get('/posts/tags/{tag}', "TagsController@index");

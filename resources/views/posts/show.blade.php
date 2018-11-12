@@ -26,6 +26,7 @@
                   <!--Post-->
                     <div class="blog-post">
                         <h2 class="blog-post-title"><a style="text-decoration: none;" href="#">{{$post->title}}</a></h2>
+
                         <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="#">{{$post->id}}</a></p>
                         <p>{!!$post->body!!}</p>
                     </div>
@@ -33,6 +34,17 @@
                 @endif
             </div>
             <hr>
+            <!--Tags-->
+            @if($post->tags)
+              <ul style="list-style-type: none;margin: 0px;padding: 0px;display:inline-block;">
+                @foreach ($post->tags as $item)
+                  <li class="alert alert-primary">
+                    <a href="/posts/tags/{{$item}}" style="text-decoration: none;">{{$item->name}}</a>
+                  </li>
+                @endforeach
+              </ul>
+            @endif
+          <hr style="margin-top: 0px;">
             <!--Komentari na post.-->
             @if(count($post->comments)>0)
             <ul class="list-group">

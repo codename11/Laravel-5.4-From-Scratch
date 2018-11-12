@@ -9,4 +9,15 @@
             @endforeach  
         </ol>
     @endif
+    <br>
+    <h4 class="font-italic">Tags</h4>
+    @if(isset($tags) && count($tags)>0)
+        <ol class="list-unstyled mb-0">
+            @foreach($tags as $tag)
+                <li>
+                <a href="/posts/tags/{{$tag}}">{{$tag}}</a>
+                </li>
+            @endforeach  
+        </ol>
+    @endif
 </div>

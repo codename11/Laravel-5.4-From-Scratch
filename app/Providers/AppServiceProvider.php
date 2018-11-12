@@ -19,7 +19,13 @@ class AppServiceProvider extends ServiceProvider
         posalje se direktno archives fajlu, pa gde kod se pozove fajl, 
         ti podaci su dostupni.*/
         view()->composer("layouts.inc.archives", function($view){
-            $view->with("archives", \App\Post::archives());
+            
+            /*$view->with("archives", \App\Post::archives());
+            $view->with("tags", \App\Tag::has("posts")->pluck("name"));*/
+            //Oba su ista.
+            $archives = \App\Post::archives();
+            $tags = \App\Tag::has("posts")->pluck("name");
+            $view->with(compact("archives", "tags"));
         });
     }
 
